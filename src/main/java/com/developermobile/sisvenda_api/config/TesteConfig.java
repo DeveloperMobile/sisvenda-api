@@ -1,13 +1,7 @@
 package com.developermobile.sisvenda_api.config;
 
-import com.developermobile.sisvenda_api.entities.Client;
-import com.developermobile.sisvenda_api.entities.Order;
-import com.developermobile.sisvenda_api.entities.Product;
-import com.developermobile.sisvenda_api.entities.Supplier;
-import com.developermobile.sisvenda_api.repository.ClientRepository;
-import com.developermobile.sisvenda_api.repository.OrderRepository;
-import com.developermobile.sisvenda_api.repository.ProductRepository;
-import com.developermobile.sisvenda_api.repository.SupplierRepository;
+import com.developermobile.sisvenda_api.entities.*;
+import com.developermobile.sisvenda_api.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +24,9 @@ public class TesteConfig implements CommandLineRunner {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -107,6 +104,19 @@ public class TesteConfig implements CommandLineRunner {
         clientRepository.saveAll(Arrays.asList(c1, c2, c3));
         supplierRepository.saveAll(Arrays.asList(f1, f2, f3));
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
+        orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 4, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o2, p1, 2, p1.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p2, 3, p2.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p1, 5, p1.getPrice());
+        OrderItem oi5 = new OrderItem(o4, p2, 2, p2.getPrice());
+        OrderItem oi6 = new OrderItem(o4, p1, 2, p1.getPrice());
+        OrderItem oi7 = new OrderItem(o5, p4, 2, p4.getPrice());
+        OrderItem oi8 = new OrderItem(o5, p3, 1, p3.getPrice());
+        OrderItem oi9 = new OrderItem(o5, p1, 1, p1.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5, oi6, oi7, oi8, oi9));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3, o4, o5));
     }
 }
