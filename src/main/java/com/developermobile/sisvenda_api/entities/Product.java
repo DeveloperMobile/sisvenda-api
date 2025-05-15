@@ -16,13 +16,18 @@ public class Product implements Serializable {
     private Integer stock;
     private Double price;
 
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
     public Product() { }
 
-    public Product(Long id, String name, Integer stock, Double price) {
+    public Product(Long id, String name, Integer stock, Double price, Supplier supplier) {
         this.id = id;
         this.name = name;
         this.stock = stock;
         this.price = price;
+        this.supplier = supplier;
     }
 
     public Long getId() {
@@ -55,6 +60,14 @@ public class Product implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override

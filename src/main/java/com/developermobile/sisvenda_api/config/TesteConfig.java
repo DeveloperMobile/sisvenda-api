@@ -93,10 +93,10 @@ public class TesteConfig implements CommandLineRunner {
                 null,
                 null);
 
-        Product p1 = new Product(null, "Biscoito Cream Cracker Vitarela", 10, 3.99);
-        Product p2 = new Product(null, "Caneta Bic", 10, 1.50);
-        Product p3 = new Product(null, "Desodoramte Suave", 10, 12.00);
-        Product p4 = new Product(null, "Cafe Santa Clara", 10, 12.00);
+        Product p1 = new Product(null, "Biscoito Cream Cracker Vitarela", 10, 3.99, f1);
+        Product p2 = new Product(null, "Caneta Bic", 10, 1.50, f1);
+        Product p3 = new Product(null, "Desodorante Suave", 10, 12.00, f2);
+        Product p4 = new Product(null, "Cafe Santa Clara", 10, 12.00, f2);
 
         Order o1 = new Order(null, Instant.parse("2020-04-17T00:00:00Z"), c1);
         Order o2 = new Order(null, Instant.parse("2024-11-26T00:00:00Z"), c1);
