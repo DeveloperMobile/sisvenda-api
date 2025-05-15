@@ -3,5 +3,5 @@ package com.developermobile.sisvenda_api.repository;
 import com.developermobile.sisvenda_api.entities.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ClienteRepository extends JpaRepository<Client, Long> {
+public interface ClientRepository extends JpaRepository<Client, Long> {
 }

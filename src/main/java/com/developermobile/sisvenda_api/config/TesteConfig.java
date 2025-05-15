@@ -1,9 +1,11 @@
 package com.developermobile.sisvenda_api.config;
 
-import com.developermobile.sisvenda_api.entities.Cliente;
-import com.developermobile.sisvenda_api.entities.Fornecedor;
-import com.developermobile.sisvenda_api.repository.ClienteRepository;
-import com.developermobile.sisvenda_api.repository.FornecedorRepository;
+import com.developermobile.sisvenda_api.entities.Client;
+import com.developermobile.sisvenda_api.entities.Product;
+import com.developermobile.sisvenda_api.entities.Supplier;
+import com.developermobile.sisvenda_api.repository.ClientRepository;
+import com.developermobile.sisvenda_api.repository.ProductRepository;
+import com.developermobile.sisvenda_api.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -15,15 +17,17 @@ import java.util.Arrays;
 @Profile("test")
 public class TesteConfig implements CommandLineRunner {
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClientRepository clientRepository;
 
     @Autowired
-    private FornecedorRepository fornecedorRepository;
+    private SupplierRepository supplierRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        Cliente c1 = new Cliente(null,
+        Client c1 = new Client(null,
                 "Tiago Vieira Silva",
                 "Setor 1, Rua C, Quadra C, Caminho 9, Nº 8A",
                 "Cajazeiras 10",
@@ -33,7 +37,7 @@ public class TesteConfig implements CommandLineRunner {
                 "7183024029",
                 "tiago.pereira.vieira@gmail.com");
 
-        Cliente c2 = new Cliente(null,
+        Client c2 = new Client(null,
                 "Rosana Vieira Silva",
                 "Setor 1, Rua C, Quadra C, Caminho 9, Nº 8A",
                 "Cajazeiras 10",
@@ -43,7 +47,7 @@ public class TesteConfig implements CommandLineRunner {
                 "71991413843",
                 "rosanavieirasilva2014@gmail.com");
 
-        Fornecedor f1 = new Fornecedor(null,
+        Supplier f1 = new Supplier(null,
                 "Emporio",
                 "Setor 1, Rua C, Quadra C, Caminho 24, S/N",
                 "Cajazeiras 10",
@@ -53,7 +57,7 @@ public class TesteConfig implements CommandLineRunner {
                 "7124681357",
                 "emporio@gmail.com");
 
-        Fornecedor f2 = new Fornecedor(null,
+        Supplier f2 = new Supplier(null,
                 "Atacadao",
                 null,
                 "Fazenda Grande 2",
@@ -63,7 +67,13 @@ public class TesteConfig implements CommandLineRunner {
                 "7123456789",
                 "atacadao@gmail.com");
 
-        clienteRepository.saveAll(Arrays.asList(c1, c2));
-        fornecedorRepository.saveAll(Arrays.asList(f1, f2));
+        Product p1 = new Product(null, "Biscoito Cream Cracker Vitarela", 10, 3.99);
+        Product p2 = new Product(null, "Caneta Bic", 10, 1.50);
+        Product p3 = new Product(null, "Desodoramte Suave", 10, 12.00);
+        Product p4 = new Product(null, "Cafe Santa Clara", 10, 12.00);
+
+        clientRepository.saveAll(Arrays.asList(c1, c2));
+        supplierRepository.saveAll(Arrays.asList(f1, f2));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
     }
 }

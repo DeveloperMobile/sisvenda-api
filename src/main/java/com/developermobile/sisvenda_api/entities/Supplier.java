@@ -6,11 +6,11 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_fornecedor")
-public class Fornecedor extends People implements Serializable {
-    public Fornecedor() { }
+@Table(name = "tb_supplier")
+public class Supplier extends People implements Serializable {
+    public Supplier() { }
 
-    public Fornecedor(Long id, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
-        super(id, nome, endereco, bairro, cidade, uf, cep, telefone, email);
+    public Supplier(Long id, String name, String address, String neighborhood, String city, String fu, String zipcode, String phone, String email) {
+        super(id, name, address, neighborhood, city, fu, zipcode, phone, email);
     }
 }

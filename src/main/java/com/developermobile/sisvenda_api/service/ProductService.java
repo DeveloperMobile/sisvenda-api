@@ -1,18 +1,18 @@
 package com.developermobile.sisvenda_api.service;
 
-import com.developermobile.sisvenda_api.entities.Supplier;
-import com.developermobile.sisvenda_api.repository.SupplierRepository;
+import com.developermobile.sisvenda_api.entities.Product;
+import com.developermobile.sisvenda_api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SupplierService {
+public class ProductService {
     @Autowired
-    private SupplierRepository repository;
+    private ProductRepository repository;
 
-    public List<Supplier> findAll() {
+    public List<Product> findAll() {
         return repository.findAll();
     }
 }

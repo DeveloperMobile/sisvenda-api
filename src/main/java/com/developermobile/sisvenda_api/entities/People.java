@@ -8,7 +8,7 @@ import jakarta.persistence.MappedSuperclass;
 import java.util.Objects;
 
 @MappedSuperclass
-public abstract class Pessoa {
+public abstract class People {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,21 +17,21 @@ public abstract class Pessoa {
     private String neighborhood;
     private String city;
     private String fu;
-    private String cep;
+    private String zipcode;
     private String phone;
     private String email;
 
-    public Pessoa() { }
+    public People() { }
 
-    public Pessoa(Long id, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
+    public People(Long id, String name, String address, String neighborhood, String city, String fu, String zipcode, String phone, String email) {
         this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.uf = uf;
-        this.cep = cep;
-        this.telefone = telefone;
+        this.name = name;
+        this.address = address;
+        this.neighborhood = neighborhood;
+        this.city = city;
+        this.fu = fu;
+        this.zipcode = zipcode;
+        this.phone = phone;
         this.email = email;
     }
 
@@ -43,60 +43,60 @@ public abstract class Pessoa {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getAddress() {
+        return address;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getNeighborhood() {
+        return neighborhood;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCity() {
+        return city;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getUf() {
-        return uf;
+    public String getFu() {
+        return fu;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setFu(String fu) {
+        this.fu = fu;
     }
 
-    public String getCep() {
-        return cep;
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -110,7 +110,7 @@ public abstract class Pessoa {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Pessoa people = (Pessoa) o;
+        People people = (People) o;
         return Objects.equals(id, people.id);
     }
 
