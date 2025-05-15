@@ -12,13 +12,13 @@ public abstract class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String endereco;
-    private String bairro;
-    private String cidade;
-    private String uf;
+    private String name;
+    private String address;
+    private String neighborhood;
+    private String city;
+    private String fu;
     private String cep;
-    private String telefone;
+    private String phone;
     private String email;
 
     public Pessoa() { }

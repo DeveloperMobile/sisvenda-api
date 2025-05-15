@@ -1,7 +1,7 @@
 package com.developermobile.sisvenda_api.resource;
 
-import com.developermobile.sisvenda_api.entities.Cliente;
-import com.developermobile.sisvenda_api.service.ClienteService;
+import com.developermobile.sisvenda_api.entities.Supplier;
+import com.developermobile.sisvenda_api.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteResource {
+@RequestMapping(value = "/fornecedores")
+public class FornecedorResource {
     @Autowired
-    private ClienteService service;
+    private FornecedorService service;
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> findAll() {
-        List<Cliente> clienteList = service.findAll();
-        return ResponseEntity.ok().body(clienteList);
+    public ResponseEntity<List<Supplier>> findAll() {
+        List<Supplier> fornecedorList = service.findAll();
+        return ResponseEntity.ok().body(fornecedorList);
     }
 }

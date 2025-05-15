@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "tb_fornecedor")
-public class Fornecedor extends Pessoa implements Serializable {
+public class Fornecedor extends People implements Serializable {
     public Fornecedor() { }
 
     public Fornecedor(Long id, String nome, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
