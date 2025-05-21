@@ -1,9 +1,12 @@
 package com.developermobile.sisvenda_api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_product")
@@ -19,6 +22,9 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Product() { }
 
@@ -68,6 +74,15 @@ public class Product implements Serializable {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem oi : items) {
+            set.add(oi.getOrder());
+        }
+        return set;
     }
 
     @Override
