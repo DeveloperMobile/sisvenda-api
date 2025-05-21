@@ -1,12 +1,13 @@
 package com.developermobile.sisvenda_api.resource;
 
+import com.developermobile.sisvenda_api.dto.SupplierDTO;
+import com.developermobile.sisvenda_api.dto.SupplierMinDTO;
 import com.developermobile.sisvenda_api.entities.Supplier;
 import com.developermobile.sisvenda_api.service.SupplierService;
+import com.developermobile.sisvenda_api.utils.URIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +18,19 @@ public class SupplierResource {
     private SupplierService service;
 
     @GetMapping
-    public ResponseEntity<List<Supplier>> findAll() {
-        List<Supplier> fornecedorList = service.findAll();
+    public ResponseEntity<List<SupplierMinDTO>> findAll() {
+        List<SupplierMinDTO> fornecedorList = service.findAll();
         return ResponseEntity.ok().body(fornecedorList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SupplierDTO> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(service.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Supplier> insert(@RequestBody Supplier supplier) {
+        supplier = service.insert(supplier);
+        return ResponseEntity.created(URIUtils.getUri(supplier.getId())).body(supplier);
     }
 }
