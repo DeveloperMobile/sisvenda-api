@@ -1,12 +1,13 @@
 package com.developermobile.sisvenda_api.resource;
 
+import com.developermobile.sisvenda_api.dto.ProductDTO;
+import com.developermobile.sisvenda_api.dto.ProductMinDTO;
 import com.developermobile.sisvenda_api.entities.Product;
 import com.developermobile.sisvenda_api.service.ProductService;
+import com.developermobile.sisvenda_api.utils.URIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +18,19 @@ public class ProductResource {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<List<Product>> findAll() {
-        List<Product> productList = service.findAll();
+    public ResponseEntity<List<ProductMinDTO>> findAll() {
+        List<ProductMinDTO> productList = service.findAll();
         return ResponseEntity.ok().body(productList);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(service.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> insert(@RequestBody Product product) {
+        product = service.insert(product);
+        return ResponseEntity.created(URIUtils.getUri(product.getId())).body(product);
     }
 }
