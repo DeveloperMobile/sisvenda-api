@@ -8,9 +8,7 @@ import com.developermobile.sisvenda_api.utils.URIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -34,5 +32,11 @@ public class ClientResource {
     public ResponseEntity<Client> insert(@RequestBody Client client) {
         client = service.insert(client);
         return ResponseEntity.created(URIUtils.getUri(client.getId())).body(client);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
