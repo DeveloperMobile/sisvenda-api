@@ -39,4 +39,10 @@ public class SupplierResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Supplier> update(@PathVariable("id") Long id, @RequestBody Supplier supplier) {
+        supplier = service.update(id, supplier);
+        return ResponseEntity.ok().body(supplier);
+    }
 }

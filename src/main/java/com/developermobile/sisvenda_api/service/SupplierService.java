@@ -32,4 +32,21 @@ public class SupplierService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    public Supplier update(Long id, Supplier supplier) {
+        Supplier entity = repository.getReferenceById(id);
+        updateData(entity, supplier);
+        return repository.save(entity);
+    }
+
+    private void updateData(Supplier entity, Supplier obj) {
+        entity.setName(obj.getName());
+        entity.setAddress(obj.getAddress());
+        entity.setNeighborhood(obj.getNeighborhood());
+        entity.setCity(obj.getCity());
+        entity.setFu(obj.getFu());
+        entity.setZipcode(obj.getZipcode());
+        entity.setPhone(obj.getPhone());
+        entity.setEmail(obj.getEmail());
+    }
 }

@@ -34,14 +34,9 @@ public class ClienteService {
     }
 
     public Client update(Long id, Client client) {
-       try {
-           Client entity = repository.getReferenceById(id);
-           updateData(entity, client);
-           return repository.save(entity);
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-       return null;
+        Client entity = repository.getReferenceById(id);
+        updateData(entity, client);
+        return repository.save(entity);
     }
 
     private void updateData(Client entity, Client obj) {
