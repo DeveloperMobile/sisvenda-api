@@ -4,7 +4,6 @@ import com.developermobile.sisvenda_api.dto.ClientDTO;
 import com.developermobile.sisvenda_api.dto.ClientMinDTO;
 import com.developermobile.sisvenda_api.entities.Client;
 import com.developermobile.sisvenda_api.repository.ClientRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,17 +25,14 @@ public class ClienteService {
         return repository.findById(id).map(ClientDTO::new).get();
     }
 
-    @Transactional(readOnly = true)
     public Client insert(Client client) {
         return repository.save(client);
     }
 
-    @Transactional(readOnly = true)
     public void delete(Long id) {
         repository.deleteById(id);
     }
 
-    @Transactional
     public Client update(Long id, Client client) {
        try {
            Client entity = repository.getReferenceById(id);

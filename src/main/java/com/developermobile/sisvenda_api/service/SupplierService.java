@@ -25,8 +25,11 @@ public class SupplierService {
         return repository.findById(id).map(SupplierDTO::new).get();
     }
 
-    @Transactional
     public Supplier insert(Supplier supplier) {
         return repository.save(supplier);
+    }
+
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

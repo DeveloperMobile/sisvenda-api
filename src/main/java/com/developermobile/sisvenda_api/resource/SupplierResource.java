@@ -33,4 +33,10 @@ public class SupplierResource {
         supplier = service.insert(supplier);
         return ResponseEntity.created(URIUtils.getUri(supplier.getId())).body(supplier);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
