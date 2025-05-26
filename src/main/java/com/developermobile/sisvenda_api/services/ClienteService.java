@@ -4,8 +4,11 @@ import com.developermobile.sisvenda_api.dto.ClientDTO;
 import com.developermobile.sisvenda_api.dto.ClientMinDTO;
 import com.developermobile.sisvenda_api.entities.Client;
 import com.developermobile.sisvenda_api.repository.ClientRepository;
+import com.developermobile.sisvenda_api.resources.exceptions.DatabaseException;
 import com.developermobile.sisvenda_api.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +36,17 @@ public class ClienteService {
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
+        try {
+            if (repository.existsById(id)) {
+                repository.deleteById(id);
+            } else {
+                throw new ResourceNotFoundException(id);
+            }
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public Client update(Long id, Client client) {

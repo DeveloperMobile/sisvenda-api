@@ -4,9 +4,12 @@ import com.developermobile.sisvenda_api.dto.SupplierDTO;
 import com.developermobile.sisvenda_api.dto.SupplierMinDTO;
 import com.developermobile.sisvenda_api.entities.Supplier;
 import com.developermobile.sisvenda_api.repository.SupplierRepository;
+import com.developermobile.sisvenda_api.resources.exceptions.DatabaseException;
 import com.developermobile.sisvenda_api.resources.exceptions.ResourceExceptionHandler;
 import com.developermobile.sisvenda_api.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +35,17 @@ public class SupplierService {
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
+       try {
+           if (repository.existsById(id)) {
+               repository.deleteById(id);
+           } else {
+               throw new ResourceNotFoundException(id);
+           }
+       } catch (EmptyResultDataAccessException e) {
+           throw new ResourceNotFoundException(id);
+       } catch (DataIntegrityViolationException e) {
+           throw new DatabaseException(e.getMessage());
+       }
     }
 
     public Supplier update(Long id, Supplier supplier) {
