@@ -1,9 +1,9 @@
-package com.developermobile.sisvenda_api.resource;
+package com.developermobile.sisvenda_api.resources;
 
 import com.developermobile.sisvenda_api.dto.SupplierDTO;
 import com.developermobile.sisvenda_api.dto.SupplierMinDTO;
 import com.developermobile.sisvenda_api.entities.Supplier;
-import com.developermobile.sisvenda_api.service.SupplierService;
+import com.developermobile.sisvenda_api.services.SupplierService;
 import com.developermobile.sisvenda_api.utils.URIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

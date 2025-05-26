@@ -1,9 +1,10 @@
-package com.developermobile.sisvenda_api.service;
+package com.developermobile.sisvenda_api.services;
 
 import com.developermobile.sisvenda_api.dto.ProductDTO;
 import com.developermobile.sisvenda_api.dto.ProductMinDTO;
 import com.developermobile.sisvenda_api.entities.Product;
 import com.developermobile.sisvenda_api.repository.ProductRepository;
+import com.developermobile.sisvenda_api.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
-        return repository.findById(id).map(ProductDTO::new).get();
+        return repository.findById(id).map(ProductDTO::new).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @Transactional

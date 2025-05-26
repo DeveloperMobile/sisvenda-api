@@ -1,9 +1,11 @@
-package com.developermobile.sisvenda_api.service;
+package com.developermobile.sisvenda_api.services;
 
 import com.developermobile.sisvenda_api.dto.SupplierDTO;
 import com.developermobile.sisvenda_api.dto.SupplierMinDTO;
 import com.developermobile.sisvenda_api.entities.Supplier;
 import com.developermobile.sisvenda_api.repository.SupplierRepository;
+import com.developermobile.sisvenda_api.resources.exceptions.ResourceExceptionHandler;
+import com.developermobile.sisvenda_api.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,7 @@ public class SupplierService {
 
     @Transactional(readOnly = true)
     public SupplierDTO findById(Long id) {
-        return repository.findById(id).map(SupplierDTO::new).get();
+        return repository.findById(id).map(SupplierDTO::new).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Supplier insert(Supplier supplier) {

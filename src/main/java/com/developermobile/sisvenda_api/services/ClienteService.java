@@ -1,14 +1,17 @@
-package com.developermobile.sisvenda_api.service;
+package com.developermobile.sisvenda_api.services;
 
 import com.developermobile.sisvenda_api.dto.ClientDTO;
 import com.developermobile.sisvenda_api.dto.ClientMinDTO;
 import com.developermobile.sisvenda_api.entities.Client;
 import com.developermobile.sisvenda_api.repository.ClientRepository;
+import com.developermobile.sisvenda_api.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -22,7 +25,7 @@ public class ClienteService {
 
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
-        return repository.findById(id).map(ClientDTO::new).get();
+        return repository.findById(id).map(ClientDTO::new).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Client insert(Client client) {

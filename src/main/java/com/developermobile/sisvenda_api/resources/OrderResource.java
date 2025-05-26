@@ -1,7 +1,7 @@
-package com.developermobile.sisvenda_api.resource;
+package com.developermobile.sisvenda_api.resources;
 
 import com.developermobile.sisvenda_api.entities.Order;
-import com.developermobile.sisvenda_api.service.OrderService;
+import com.developermobile.sisvenda_api.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

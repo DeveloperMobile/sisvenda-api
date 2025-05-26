@@ -1,4 +1,4 @@
-package com.developermobile.sisvenda_api.service;
+package com.developermobile.sisvenda_api.services;
 
 import com.developermobile.sisvenda_api.entities.Order;
 import com.developermobile.sisvenda_api.repository.OrderRepository;
