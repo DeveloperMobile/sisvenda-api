@@ -6,6 +6,7 @@ import com.developermobile.sisvenda_api.entities.Client;
 import com.developermobile.sisvenda_api.repository.ClientRepository;
 import com.developermobile.sisvenda_api.resources.exceptions.DatabaseException;
 import com.developermobile.sisvenda_api.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -50,9 +51,13 @@ public class ClienteService {
     }
 
     public Client update(Long id, Client client) {
-        Client entity = repository.getReferenceById(id);
-        updateData(entity, client);
-        return repository.save(entity);
+        try {
+            Client entity = repository.getReferenceById(id);
+            updateData(entity, client);
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(Client entity, Client obj) {

@@ -7,6 +7,7 @@ import com.developermobile.sisvenda_api.repository.SupplierRepository;
 import com.developermobile.sisvenda_api.resources.exceptions.DatabaseException;
 import com.developermobile.sisvenda_api.resources.exceptions.ResourceExceptionHandler;
 import com.developermobile.sisvenda_api.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -49,9 +50,13 @@ public class SupplierService {
     }
 
     public Supplier update(Long id, Supplier supplier) {
-        Supplier entity = repository.getReferenceById(id);
-        updateData(entity, supplier);
-        return repository.save(entity);
+        try {
+            Supplier entity = repository.getReferenceById(id);
+            updateData(entity, supplier);
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
     private void updateData(Supplier entity, Supplier obj) {
